@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <Style>
+        .even{
+            background-color: lightblue;
+        }
+    </Style>
+</head>
+<body>
+    <div class="table-container">
+        <table id="tbl">
+            <thead>
+        
+            </thead>
+            <tbody>
+    
+            </tbody>
+    
+        </table>
+    </div>
+    
+    <script src="./script.js"></script>
+    <script>
+        function getTh(){
+            const col = Object.keys(jsonData[0]);
+            const head = document.querySelector('thead');
+            jsonData.sort((a,b) => a.jobTitleName.localeCompare(b.jobTitleName));
+            let tags = "<tr>";
+                for(i=0;i<col.length;i++){
+                    tags+=`<th>${col[i]}</th>`
+                }
+                tags+="</tr>"
+                head.innerHTML = tags;
+                getTd();
+        }  
+        
+        function getTd(){
+            const body = document.querySelector('tbody');
+            let tags = "";
+            jsonData.forEach((d,index) =>{
+                const backgroundColor = index % 2 === 0 ?'background-color:lightblue':'';
+                tags += `<tr style="${backgroundColor}">
+                    <td>${d.userId}</td>
+                    <td>${d.jobTitleName}</td>
+                    <td>${d.firstName}</td>
+                    <td>${d.lastName}</td>
+                    <td>${d.preferredFullName}</td>
+                    <td>${d.employeeCode}</td>
+                    <td>${d.region}</td>
+                    <td>${d.phoneNumber}</td>
+                    <td>${d.emailAddress}</td>
+                    </tr>`
+        
+                    
+            })
+            body.innerHTML = tags
+            
+        }
+        getTh();
+    </script>
+</body>
+</html>
